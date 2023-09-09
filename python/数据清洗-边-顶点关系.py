@@ -18,13 +18,15 @@ def check(name,type,sheet):
             for director in directors:
                 if(name.__eq__(director.replace(" ",""))):
                     data.append([name,row[0].value.replace(" ",""), "导演"])
-            for actor in actors:
-                data.append([name,actor.replace(" ",""), "合作"])
+                    for actor in actors:
+                        if not name.__eq__(actor):
+                            data.append([name,actor.replace(" ",""), "合作"])
         elif(type.__eq__("演员")):
-            actors = row[5].value.split('/')
+            actors = row[6].value.split('/')
             for actor in actors:
                 if(name.__eq__(actor.replace(" ",""))):
                     data.append([name,row[0].value.replace(" ",""), "出演"])
+                    print("出演")
 
 
 def clean():
@@ -63,12 +65,15 @@ if __name__ == "__main__":
     # 清洗
     cleaned_data = clean()
     # 去重
-    unique_data_dict = {}  # 使用字典进行去重操作
-    for row in cleaned_data:
-        # 将每行数据转换成元组并排序，以确保字段顺序无关紧要
-        row_tuple = tuple(sorted(row[:2]))
-        unique_data_dict[row_tuple] = row  # 使用元组作为键来构建字典
-    # 将字典的值（唯一行）转换回列表
-    unique_data = list(unique_data_dict.values())
+    # unique_data_dict = {}  # 使用字典进行去重操作
+    # for row in cleaned_data:
+    #     if row[2]=="合作":
+    #         # 将每行数据转换成元组并排序，以确保字段顺序无关紧要
+    #         row_tuple = tuple(sorted(row[:2]))
+    #         # row_tuple = tuple(sorted(row[:3]))
+    #         print(row_tuple)
+    #         unique_data_dict[row_tuple] = row  # 使用元组作为键来构建字典
+    # # 将字典的值（唯一行）转换回列表
+    # unique_data = list(unique_data_dict.values())
     # 保存
-    save(unique_data)
+    save(cleaned_data)

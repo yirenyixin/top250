@@ -6,7 +6,9 @@ csv_file_path = "movie_relation.csv"
 data = [
     ["名称", "名称", "关系"],
 ]
+i=1
 def check(name,type,sheet):
+    global  i
     for row in sheet.iter_rows(min_row=2):
         if(type.__eq__("电影名称")):
             types=row[7].value.split('/')
@@ -26,7 +28,9 @@ def check(name,type,sheet):
             for actor in actors:
                 if(name.__eq__(actor.replace(" ",""))):
                     data.append([name,row[0].value.replace(" ",""), "出演"])
-                    print("出演")
+                    print("出演",name,i)
+                    i+=1
+
 
 
 def clean():

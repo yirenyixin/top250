@@ -58,8 +58,9 @@ def secondFind():
             print("aaaaa", nodes[i])
             for row in data:
                 if row[2] == "出演" and row[1] == nodes[i]:
-                    edges.append((nodes[i], row[0], {'weight': 1}))
-                    print(nodes[i], row[0])
+                    nodes.append(row[0])
+                    edges.append((nodes[i], row[0], {'weight': 1111}))
+                    red_nodes.append(row[0])
 
 if __name__ == "__main__":
     node = "周星驰"
@@ -71,6 +72,7 @@ if __name__ == "__main__":
 
     print(nodes)
     print("edges",edges)
+    print("red",red_nodes)
     G = nx.DiGraph()
 
     plt.rcParams['font.sans-serif']=['SimHei']

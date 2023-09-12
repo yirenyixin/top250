@@ -26,8 +26,9 @@ def clean(sheet):
     for director in unique_directors:
         data.append([i, director.replace(" ", ""), "导演"])
         i += 1
+
     actors = []
-    for row in sheet.iter_rows(min_row=2, min_col=5, max_col=5):
+    for row in sheet.iter_rows(min_row=2, min_col=7, max_col=7):
         for cell in row:
             # 使用 / 拆分字符串并获取拆分后的第一个元素，然后去除多余的空格和换行符
             first_value = cell.value.split('/')

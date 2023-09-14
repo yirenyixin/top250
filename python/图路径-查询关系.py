@@ -109,10 +109,10 @@ def show(name1,name2):
     nodes=unique_nodes
     type=unique_types
     secondFind()
-    print(len(node),len(type))
-    print(nodes)
-    print("edges",edges)
-    print("red",red_nodes)
+    # print(len(node),len(type))
+    # print(nodes)
+    # print("edges",edges)
+    # print("red",red_nodes)
     G = nx.DiGraph()
 
     plt.rcParams['font.sans-serif']=['SimHei']
@@ -121,20 +121,34 @@ def show(name1,name2):
     G.add_nodes_from(nodes)
     G.add_edges_from(edges)
 
-    # 计算最短路径
-    path = nx.single_source_dijkstra_path(G, name1)
-    length = nx.single_source_dijkstra_path_length(G, name2)
-
-    print("最短路径:")
-    print(path)
-    print("最短路径长度:")
-    print(length)
     # 创建一个节点颜色字典，将节点名称映射到颜色
     node_colors = {node: 'red' if node in red_nodes else 'green' for node in nodes}
 
     # 绘制图形时使用节点颜色属性
     nx.draw_networkx(G, node_color=[node_colors[node] for node in G.nodes])
     plt.show()
+    print(nodes)
+    print(edges)
+    # # 计算从name1到name2的最短路径
+    # shortest_path = nx.shortest_path(G, source=name1, target=name2)
+    # print("最短路径:", shortest_path)
+    #
+    # # 创建一个新的图形，仅包含最短路径上的节点和边
+    # shortest_path_graph = G.subgraph(shortest_path)
+    #
+    # # 绘制最短路径
+    # pos = nx.spring_layout(shortest_path_graph)  # 指定节点的布局
+    #
+    # # 显示节点的索引作为标签
+    # labels = {node: str(node) for node in shortest_path_graph.nodes}
+    #
+    # node_colors = [node_colors[node] for node in shortest_path_graph.nodes]
+    # nx.draw_networkx_nodes(shortest_path_graph, pos, node_color=node_colors)
+    # nx.draw_networkx_edges(shortest_path_graph, pos, edgelist=shortest_path_graph.edges, edge_color="blue", width=2)
+    # nx.draw_networkx_labels(shortest_path_graph, pos, labels, font_size=10, font_color="black")
+    #
+    # # 显示最短路径图形在新的画布上
+    # plt.show()
 def check(name1,name2):
     # 读取 CSV 文件
     # with open('E:\workspace\\top250\python\movie_relation.csv', 'r', newline='', encoding='utf-8') as csv_file:
@@ -145,8 +159,10 @@ def check(name1,name2):
             if (row[0] == name1 and row[1] == name2) or (row[0] == name2 and row[1] == name1):
                 return row[2];
 if __name__ == "__main__":
-    name1="詹姆斯·卡梅隆"
-    name2="马丁·贾维斯"
+    # name1=input("请输入要查询的第一个信息：");
+    # name2=input("请输入要查询的第二个信息：");
+    name1="李力持"
+    name2="周星驰"
     flag=check(name1,name2)
     if flag=="属于" or flag=="合作" or flag=="出演":
         print("有关系",flag)

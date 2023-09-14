@@ -63,6 +63,7 @@ def secondFind():
                     red_nodes.append(row[0])
 
 if __name__ == "__main__":
+    # node=input("请输入要查询的导演信息信息：");
     node = "周星驰"
     type.append(0)
     red_nodes.append(node)

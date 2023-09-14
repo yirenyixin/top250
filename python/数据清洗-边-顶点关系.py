@@ -4,7 +4,7 @@ import csv
 # 指定要创建的 CSV 文件的路径
 csv_file_path = "movie_relation.csv"
 data = [
-    ["名称", "名称", "关系"],
+    ["名称1", "名称2", "关系"],
 ]
 i=1
 def check(name,type,sheet):
@@ -14,6 +14,9 @@ def check(name,type,sheet):
             types=row[7].value.split('/')
             for type in types:
                 data.append([name,type.replace(" ",""), "属于"])
+            actors = row[6].value.split('/')
+            for actor in actors:
+                data.append([actor.replace(" ",""),name,"出演"])
         elif(type.__eq__("导演")):
             directors = row[4].value.split('/')
             actors = row[6].value.split('/')
@@ -21,15 +24,18 @@ def check(name,type,sheet):
                 if(name.__eq__(director.replace(" ",""))):
                     data.append([name,row[0].value.replace(" ",""), "导演"])
                     for actor in actors:
-                        if not name.__eq__(actor):
+                        if not name.__eq__(actor.replace(" ","")):
                             data.append([name,actor.replace(" ",""), "合作"])
         elif(type.__eq__("演员")):
             actors = row[6].value.split('/')
+            flag=0
             for actor in actors:
                 if(name.__eq__(actor.replace(" ",""))):
-                    data.append([name,row[0].value.replace(" ",""), "出演"])
-                    print("出演",name,i)
-                    i+=1
+                    flag=1
+            for actor in actors:
+                if not name.__eq__(actor.replace(" ","")) and flag==1:
+                    # print(name,actor.replace(" ",""))
+                    data.append([name,actor.replace(" ",""), "合作"])
 
 
 

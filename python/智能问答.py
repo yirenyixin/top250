@@ -51,11 +51,9 @@ def answer_question(question):
     # 使用正则表达式提取问题中的电影名称和问题类型
     match = re.search(r'(.+)的(.+)是谁', question)
     match_relation = re.search(r'(.+)和(.+)是什么关系', question)
-
     if match:
         movie_name = match.group(1)
         question_type = match.group(2)
-
         if G.has_node(movie_name):
             # 使用 NetworkX 查找与电影相关的导演节点
             directors = [node for node in G.neighbors(movie_name) if G.edges[movie_name, node]['weight'] == 3]
@@ -72,7 +70,6 @@ def answer_question(question):
     elif match_relation:
         entity1 = match_relation.group(1)
         entity2 = match_relation.group(2)
-
         # 使用 NetworkX 检查两个实体之间的关系
         if G.has_edge(entity1, entity2):
             relation_weight = str(G[entity1][entity2]['weight'])
@@ -82,7 +79,6 @@ def answer_question(question):
             return f"{entity2}和{entity1}是{get_type(relation_weight)}关系"
         else:
             return f"抱歉，我不知道{entity1}和{entity2}之间的关系。"
-
     else:
         return "抱歉，我无法理解你的问题。"
 

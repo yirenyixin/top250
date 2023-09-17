@@ -83,8 +83,8 @@ if __name__ == "__main__":
     G.add_edges_from(edges)
 
     # 计算最短路径
-    path = nx.single_source_dijkstra_path(G, node)
-    length = nx.single_source_dijkstra_path_length(G, node)
+    # path = nx.single_source_dijkstra_path(G, node)
+    # length = nx.single_source_dijkstra_path_length(G, node)
 
     # print("最短路径:")
     # print(path)
